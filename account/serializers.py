@@ -38,11 +38,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','first_name','empid','age','teamlead','skill_set','team_set','project_set')
+        fields = ('username','password','first_name','empid','age','teamlead','skill_set','team_set','project_set')
 
     def create(self, validated_data):
         skills_data = validated_data.pop('skill_set')
-        user = User.objects.create(**validated_data)
+        user = User.objects.create_user(**validated_data)
         for skill_data in skills_data:
             Skill.objects.create(user=user,**skill_data)
         return user

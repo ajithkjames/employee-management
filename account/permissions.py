@@ -15,10 +15,10 @@ class UserPermission(permissions.IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         if obj== request.user or request.user.is_superuser:
             return True
-        else:
-            if request.method in ('HEAD', 'OPTIONS', 'GET'):
-                return True
-            return False
+        # else:
+        #     if request.method in ('HEAD', 'OPTIONS', 'GET'):
+        #         return True
+        #     return False
 
 class TeamPermission(permissions.IsAuthenticated):
 
