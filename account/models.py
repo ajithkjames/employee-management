@@ -4,12 +4,14 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+"""user model"""
 class User(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
     empid = models.CharField(max_length=255, blank=True, null=True, unique=True)
     teamlead = models.BooleanField(default=False, verbose_name="Team Lead")
 
 
+"""skills model"""
 class Skill(models.Model):
     name = models.CharField(max_length=50)
     user= models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -18,6 +20,7 @@ class Skill(models.Model):
         return u'%s - %s' % (self.name, self.user)
 
 
+"""Team Model"""
 class Team(models.Model):
 	name = models.CharField(max_length=50)
 	lead= models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -27,6 +30,7 @@ class Team(models.Model):
 		return u'%s - %s' % (self.name, self.lead)
 
 
+"""Project Model"""
 class Project(models.Model):
 	name = models.CharField(max_length=50)
 	team= models.ForeignKey(Team, null=True, blank=True, on_delete=models.CASCADE)
@@ -35,7 +39,7 @@ class Project(models.Model):
 	def __str__(self):
 		return u'%s - %s' % (self.team.name, self.name)
 
-
+"""Tasks Model"""
 class Task(models.Model):
 	title = models.CharField(max_length=50)
 	content = models.TextField()

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -10,7 +9,8 @@ from account.models import User, Skill ,Team, Project, Task
 from account.serializers import UserSerializer, SkillSerializer, TeamSerializer, ProjectSerializer, TaskSerializer
 from account.permissions import UserPermission, TeamPermission, ProjectPermission, TaskPermission
 
-# Create your views here.
+
+"""Tasks API view"""
 class TaskViewSet(viewsets.ModelViewSet):
 
 	serializer_class = TaskSerializer
@@ -18,18 +18,22 @@ class TaskViewSet(viewsets.ModelViewSet):
 	permission_classes = (TaskPermission,)
 
 
+"""Skills API view"""
 class SkillViewSet(viewsets.ModelViewSet):
 
 	serializer_class = SkillSerializer
 	queryset = Skill.objects.all()
 
 
+"""User API view"""
 class UserViewSet(viewsets.ModelViewSet):
 
 	serializer_class = UserSerializer
 	queryset = User.objects.all()
 	permission_classes = (UserPermission,)
 
+
+"""Team API view"""
 class TeamViewSet(viewsets.ModelViewSet):
 
 	serializer_class = TeamSerializer
@@ -37,6 +41,7 @@ class TeamViewSet(viewsets.ModelViewSet):
 	permission_classes = (TeamPermission,)
 
 
+"""Project API view"""
 class ProjectViewSet(viewsets.ModelViewSet):
 
 	serializer_class = ProjectSerializer
@@ -44,6 +49,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 	permission_classes = (ProjectPermission,)
 
 
+"""Employee's assigned tasks API view"""
 class EmployeeTasks(generics.ListAPIView):
 	
 	serializer_class = TaskSerializer
